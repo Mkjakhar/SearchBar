@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search-bar</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      h2 {
+        font-size: 30px;
+      }
+      ul {
+        /* set up ul hide default */
+        display: none;
+        list-style-type: none;
+        font-size: 20px !important;
+        border: 1px solid gray;
+        width: 100%;
+        padding-left: 0;
+        border-radius: 12px;
+        margin-top: 0;
+      }
+      ul li {
+        padding: 11px 18px;
+      }
+      .container {
+        padding: 50px 20%;
+      }
+      input {
+        padding: 18px;
+        border-radius: 12px;
+        border: 1px solid gray;
+        width: 100%;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <h2>Search country</h2>
+        <input
+          id="input"
+          type="text"
+          onkeyup="search()"
+          placeholder="search..."
+        />
+        <ul id="list"></ul>
+      </div>
+    </section>
+  </body>
+  <script>
+    // array of list of country
+    const countryList = [
+      "Australia",
+      "Austria",
+      "Brazil",
+      "Canada",
+      "Denmark",
+      "Egypt",
+      "France",
+      "Germany",
+      "USA",
+      "Vietnam",
+    ];
+    const list = document.getElementById("list");
+    // created a li for these countries names and append them in html
+    countryList.forEach((country) => {
+      let li = document.createElement("li");
+      li.innerHTML = country;
+      li.classList.add("listitems");
+      list.appendChild(li);
+    });
+    // a function for search
+    function search() {
+      let listContainer = document.getElementById("list");
+      let input = document.getElementById("input").value.toLowerCase();
+      let items = document.getElementsByClassName("listitems");
+      let result = true;
+      // a loop
+      for (let i = 0; i < countryList.length; i++) {
+        if (!items[i].innerHTML.toLowerCase().includes(input) || input === "") {
+          items[i].style.display = "none";
+        } else {
+          items[i].style.display = "block";
+          result = false;
+        }
+        listContainer.style.display = result ? "none" : "block";
+      }
+    }
+  </script>
+</html>
